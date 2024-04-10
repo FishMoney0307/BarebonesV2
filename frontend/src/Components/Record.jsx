@@ -5,8 +5,8 @@ import ReactDOM from 'react-dom';
 
 export default function Record() {
   const [form, setForm] = useState({
-    name: "",
-    position: "",
+    title: "",
+    priority: "",
     level: "",
   });
   const [isNew, setIsNew] = useState(true);
@@ -77,7 +77,7 @@ export default function Record() {
     } catch (error) {
       console.error('A problem occurred adding or updating a record: ', error);
     } finally {
-      setForm({ name: "", position: "", level: "" });
+      setForm({ title: "", priority: "", level: "" });
       navigate("/");
     }
   }
