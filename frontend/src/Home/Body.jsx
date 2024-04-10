@@ -4,6 +4,7 @@ import Submit from './Submit.jsx';
 import Description from './Description.jsx';
 import DBList from './DBList.jsx';
 import CRUD from '../CRUD/CRUD.jsx';
+import RecordList from '../Components/RecordList.jsx';
 
 const Body = () => {
   return (
@@ -21,6 +22,9 @@ const Body = () => {
           </div>
           <div className="smallContainer" style={{marginTop: "50px", marginBottom: "50px"}}>
             <CRUD />
+          </div>
+          <div className="smallContainer" style={{marginTop: "50px", marginBottom: "50px"}}>
+            <RecordList />
           </div>
         </div>
       </div>

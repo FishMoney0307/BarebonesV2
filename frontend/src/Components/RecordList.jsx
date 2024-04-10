@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import React from 'react';
 import ReactDOM from 'react-dom';
+import '../Home/DBList.css'
+import { Button } from "react-bootstrap";
 
 const Record = (props) => (
   <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
@@ -81,7 +83,29 @@ export default function RecordList() {
   // This following section will display the table with the records of individuals.
   return (
     <>
-      <h3 className="text-lg font-semibold p-4">Employee Records</h3>
+      <div className = "table-container">
+        <div className="table-row heading">
+          <div className="row-item">Title</div>
+          <div className="row-item">Priority</div>
+          <div className="row-item">Action</div>
+        </div>
+        <div>
+          {records.map((record) => {
+            return (
+              <div className="table-row">
+                <div className="row-item">{record.title}</div>
+                <div className="row-item">{record.priority}</div>
+                <div className="row-item">
+                  <Button onClick={(e) => deleteRecord(record._id)}
+                    variant="danger">Delete</Button>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+      {/*
       <div className="border rounded-lg overflow-hidden">
         <div className="relative w-full overflow-auto">
           <table className="w-full caption-bottom text-sm">
@@ -107,6 +131,7 @@ export default function RecordList() {
           </table>
         </div>
       </div>
+        */}
     </>
   );
 }
