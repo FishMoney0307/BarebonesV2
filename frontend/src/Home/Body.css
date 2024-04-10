@@ -1,0 +1,46 @@
+body {
+    text-align: center;
+    margin: auto;
+    background-color:white;
+    justify-content: center;
+    border-radius: 8px;
+    
+    /*margin-top: -100px;*/
+}
+
+.bigContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #f2f2f2;
+
+    margin: 0 auto;
+    border-radius: 8px;
+    
+    box-shadow: rgba(0, 0, 0, .07);
+}
+
+.smallContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    margin: 0 auto;
+    border-radius: 4px;
+    
+}
+
+/*  might be obsolete. think i used it before i properly CSS'd the tables
+    If you're seeing this comment then I forgot about it.*/
+.smallContainerColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    margin: 0 auto;
+    border-radius: 4px;
+    border: 1px solid #003366;
+    box-shadow: 0px 1px 4px #000000;
+}

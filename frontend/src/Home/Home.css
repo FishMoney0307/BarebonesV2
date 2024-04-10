@@ -1,0 +1,13 @@
+.Home {
+    text-align: center;
+    width: 75%;
+    justify-content: center;
+    margin: auto;
+    border-radius: 4px;
+    background-color: white;
+  }
+
+.background {
+  background-color:#3b0a04;
+}
+  
