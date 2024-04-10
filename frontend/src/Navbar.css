@@ -1,5 +1,21 @@
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+.navbar {
+    margin: 0 auto;
+    display: flex;
+    background-color: #3b0a04;
+}
+
+.booton {
+    display: inline-block;
+    padding: 10px 75px;
+    font-size:24px;
+    background-color: #ff5650;
+    color: #FFFFFF;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.booton:hover {
+    background-color: #ff56508c;
 }

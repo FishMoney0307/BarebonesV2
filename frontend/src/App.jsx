@@ -38,7 +38,7 @@ const App = () => {
   return (
     <div className="w-full p-6">
       <Navbar />
-      <Outlet />
+      <Outlet style={{"width" : "100%"}} />
     </div>
   );
 };

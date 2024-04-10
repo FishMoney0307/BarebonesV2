@@ -9,6 +9,7 @@ import Record from "./Components/Record";
 import RecordList from "./Components/RecordList";
 import Home from "./Home/Home.jsx";
 import Contact from "./Contact/Contact.jsx";
+import About from "./About/About.jsx";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -39,6 +40,16 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+    ],
+  },
+  {
+    path: "/about",
+    element: <App />,
+    children: [
+      {
+        path: "/about",
+        element: <About />,
       },
     ],
   },

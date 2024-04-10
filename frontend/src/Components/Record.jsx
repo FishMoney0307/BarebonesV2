@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 export default function Record() {
   const [form, setForm] = useState({
