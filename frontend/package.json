@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
+    "docker": "^1.0.0",
     "react-bootstrap": "^2.10.2"
   }
 }
