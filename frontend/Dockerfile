@@ -8,8 +8,8 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 5050
+EXPOSE 3000
 
-ENV EXPRESS_URL http://localhost:5050
+ENV EXPRESS_URL http://localhost:3001
 
 CMD ["npm", "start"]
