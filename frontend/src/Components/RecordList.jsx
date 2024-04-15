@@ -68,6 +68,9 @@ export default function RecordList() {
   }
 
   // This method will map out the records on the table
+  // EDIT:
+  // Sorta defunct since I preferred to pit the button in the return()
+  // due to using the grid layout
   function recordList() {
     return records.map((record) => {
       return (
