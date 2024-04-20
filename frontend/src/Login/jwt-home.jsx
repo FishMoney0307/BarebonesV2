@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 export default function Home () {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const router = userRouter();
+    const router = useRouter();
 
     function submitUser (event) {
         event.preventDefault();
@@ -21,7 +21,7 @@ export default function Home () {
                     localStorage.setItem('jwt-token', data.token);
                     setUsername('');
                     setPassword('');
-                    router.push('/jwt-safehouse'); //endpoint, change to something else later
+                    router.push('/Safehouse.jsx'); //endpoint, change to something else later
                 } else {
                     alert(data.message);
                 }

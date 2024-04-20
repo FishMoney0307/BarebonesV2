@@ -10,9 +10,9 @@ import RecordList from "./Components/RecordList";
 import Home from "./Home/Home.jsx";
 import Contact from "./Contact/Contact.jsx";
 import About from "./About/About.jsx";
+//import JWThome from "./Login/JWT-home.jsx"
+//import Safehouse from "./Login/Safehouse.jsx";
 import "./index.css";
-import JWThome from "./Login/jwt-home.jsx";
-import Safehouse from "./Login/safehouse.jsx";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +65,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  /*
   {
     path: "/jwthome",
     element: <App />,
@@ -85,6 +86,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  */
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

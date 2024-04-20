@@ -8,7 +8,7 @@ export default function SafeHouse() {
     useEffect(() => {
         const token = localStorage.getItem('jwt-token');
         setToken(token);
-        fetch('./safehouse.js', {
+        fetch('/safehouse', {
             headers: {
                 'jwt-token': token,
             },
