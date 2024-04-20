@@ -11,6 +11,8 @@ import Home from "./Home/Home.jsx";
 import Contact from "./Contact/Contact.jsx";
 import About from "./About/About.jsx";
 import "./index.css";
+import JWThome from "./Login/jwt-home.jsx";
+import Safehouse from "./Login/safehouse.jsx";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +62,26 @@ const router = createBrowserRouter([
       {
         path: "/create",
         element: <Record />,
+      },
+    ],
+  },
+  {
+    path: "/jwthome",
+    element: <App />,
+    children: [
+      {
+        path: "/jwthome",
+        element: <JWThome />,
+      },
+    ],
+  },
+  {
+    path: "/safehouse",
+    element: <App />,
+    children: [
+      {
+        path: "/safehouse",
+        element: <Safehouse />,
       },
     ],
   },
