@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
-export default function Home () {
+export default function JWThome () {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter();

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
-export default function SafeHouse() {
+export default function Safehouse() {
     const [token, setToken] = useState('');
     const [userData, setUserData] = useState({});
 
