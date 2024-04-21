@@ -47,7 +47,7 @@ export default function Navbar() {
           <NavLink className="booton" to="/contact">Contact Me</NavLink>
         </div>
         <div>
-          <NavLink className="booton" to="/jwthome">Login</NavLink>
+          <NavLink className="booton" to="/login">Login</NavLink>
         </div>
         <div>
           <NavLink className="booton" to="/create">Create Employee</NavLink>
