@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./authProvider";
+import React from 'react';
 
 const Logout = () => {
   const { setToken } = useAuth();

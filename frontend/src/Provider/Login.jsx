@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./authProvider";
 import React, { useState } from 'react';
-import jwt from 'jsonwebtoken';
+//import jwt from 'jsonwebtoken';
 
 const Login = () => {
   const [u, setU] = useState('');
@@ -12,8 +12,8 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    let token = jwt.sign({ email_id: 'email here' }, "Stack", { expiresIn: '10d' });
-    setToken(token);
+    //let token = jwt.sign({ email_id: 'email here' }, "Stack", { expiresIn: '10d' });
+    setToken('token');
     navigate("/", { replace: true });
   };
 
@@ -63,7 +63,7 @@ const Login = () => {
 function loginUser(u, p) {
   return new Promise((res, rej) => {
     setTimeout(() => {
-      let shouldError = (u === '' || p === '');
+      let shouldError = (u === '' || p === '' || m === '');
       if (shouldError) {
         rej (new Error('Please fill out all fields'));
       } else {

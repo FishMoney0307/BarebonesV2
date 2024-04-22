@@ -21,6 +21,7 @@
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "next": "^14.2.2",
-    "react-bootstrap": "^2.10.2"
+    "react-bootstrap": "^2.10.2",
+    "react-jwt": "^1.2.1"
   }
 }

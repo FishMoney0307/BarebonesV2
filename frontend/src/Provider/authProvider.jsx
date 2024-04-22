@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from 'react';
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import Cookies from 'js-cookie';
 
 const AuthContext = createContext();
 
@@ -10,6 +11,7 @@ const AuthProvider = ({ children }) => {
 
   // Function to set the authentication token
   const setToken = (newToken) => {
+    Cookies.set('token', newToken, {expires: 7, secure: true });
     setToken_(newToken);
   };
 
