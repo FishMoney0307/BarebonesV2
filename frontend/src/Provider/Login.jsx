@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./authProvider";
 import React, { useState } from 'react';
+import jwt from 'jsonwebtoken';
 
 const Login = () => {
   const [u, setU] = useState('');
@@ -11,26 +12,17 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    setToken("this is a test token");
+    let token = jwt.sign({ email_id: 'email here' }, "Stack", { expiresIn: '10d' });
+    setToken(token);
     navigate("/", { replace: true });
   };
-  /*
-  setTimeout(() => {
-    handleLogin();
-  }, 3 * 1000); */
-
-  /*
-  async function login(ev) {
-    ev.preventDefault();
-    handleLogin();
-  } */
 
   async function login (e) {
     e.preventDefault();
     setError(null);
     setStatus('submitting');
     try {
-      await loginUser (u, p);
+      await loginUser (u, p, m);
     } catch (err) {
       setStatus('typing');
       setError(err);
