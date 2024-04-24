@@ -12,7 +12,6 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    //let token = jwt.sign({ email_id: 'email here' }, "Stack", { expiresIn: '10d' });
     setToken('token');
     navigate("/", { replace: true });
   };
@@ -22,7 +21,7 @@ const Login = () => {
     setError(null);
     setStatus('submitting');
     try {
-      await loginUser (u, p, m);
+      await loginUser (u, p);
     } catch (err) {
       setStatus('typing');
       setError(err);
@@ -63,7 +62,7 @@ const Login = () => {
 function loginUser(u, p) {
   return new Promise((res, rej) => {
     setTimeout(() => {
-      let shouldError = (u === '' || p === '' || m === '');
+      let shouldError = (u === '' || p === '');
       if (shouldError) {
         rej (new Error('Please fill out all fields'));
       } else {
