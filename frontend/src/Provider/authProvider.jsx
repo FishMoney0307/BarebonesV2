@@ -5,6 +5,9 @@ import Cookies from 'js-cookie';
 
 const AuthContext = createContext();
 
+/* https://dev.to/sanjayttg/jwt-authentication-in-react-with-react-router-1d03
+    Tutorial used for authentication, big help */
+
 const AuthProvider = ({ children }) => {
   // State to hold the authentication token
   const [token, setToken_] = useState(localStorage.getItem("token"));

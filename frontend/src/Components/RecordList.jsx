@@ -5,6 +5,9 @@ import ReactDOM from 'react-dom';
 import '../Home/DBList.css'
 import { Button } from "react-bootstrap";
 
+/* https://www.mongodb.com/resources/languages/mern-stack-tutorial
+    followed from the official mongodb tutorial */
+
 const Record = (props) => (
   <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
     <td className="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
