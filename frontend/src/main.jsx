@@ -10,9 +10,11 @@ import RecordList from "./Components/RecordList";
 import Home from "./Home/Home.jsx";
 import Contact from "./Contact/Contact.jsx";
 import About from "./About/About.jsx";
+import Login from "./Provider/Login.jsx";
+import Logout from "./Provider/Logout.jsx";
+//import JWThome from "./Login/JWThome.jsx"
+//import Safehouse from "./Login/Safehouse.jsx";
 import "./index.css";
-import JWThome from "./Login/jwt-home.jsx";
-import Safehouse from "./Login/safehouse.jsx";
 
 const router = createBrowserRouter([
   {
@@ -66,22 +68,22 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/jwthome",
+    path: "/login",
     element: <App />,
     children: [
       {
-        path: "/jwthome",
-        element: <JWThome />,
+        path: "/login",
+        element: <Login />,
       },
     ],
   },
   {
-    path: "/safehouse",
+    path: "/logout",
     element: <App />,
     children: [
       {
-        path: "/safehouse",
-        element: <Safehouse />,
+        path: "/logout",
+        element: <Logout />,
       },
     ],
   },
