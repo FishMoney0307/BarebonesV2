@@ -10,7 +10,7 @@ const Submit = () => {
   //MongoDB things
   const [form, setForm] = useState({
     title: "",
-    priority: "",
+    priority: "5",
   });
   const [isNew, setIsNew] = useState(true);
   const params = useParams();
@@ -36,7 +36,7 @@ const Submit = () => {
   }
   
   async function recordMongoDB (t, p) {
-    setForm(t, p);
+    //setForm({t, p});
     const game = { ...form };
     try {
       let response;
@@ -62,10 +62,17 @@ const Submit = () => {
     // /\ I might not need this, but I'll keep it for now if I want to style
     try {
       await recordMongoDB (t, p);
+      setStatus('success');
     } catch (err) {
       setStatus('typing');
       setError(err);
     }
+  }
+
+  function updateForm (value) {
+    return setForm ((prev) => {
+      return { ...prev, ...value };
+    })
   }
 
   function titleChange (ev) {
@@ -75,8 +82,6 @@ const Submit = () => {
     setP(ev.target.value);
   }
 
-
-
   return (
     <div className='flex'>
         <div>
@@ -84,12 +89,15 @@ const Submit = () => {
         </div>
         <div>
             <form onSubmit={submit}>
-                <input type="text" id="title" value={t} onChange={titleChange} /><br />
+                <input type="text" id="title" value={form.name} onChange={(e) => updateForm({title: e.target.value})} /><br />
 
                 <label for="slider">Priority: </label>
-                <input type='range' id="slider" min="0" max="10" step="1" value={p} onChange={sliderChange} /><br />
+                <input type='range' id="slider" min="0" max="10" step="1" value={form.priority} onChange={(e) => updateForm({ priority: e.target.value})} /><br />
 
                 <input type="submit" value="Submit" />
+
+                {/*status === 'success' &&
+                  <p>Your values are: {t} and {p}</p>*/}
 
                 {error != null && <p>{error.message}</p>}
             </form>
@@ -97,7 +105,5 @@ const Submit = () => {
     </div>
   )
 };
-
-
 
 export default Submit
