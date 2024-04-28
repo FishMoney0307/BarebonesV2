@@ -16,6 +16,45 @@ const Submit = () => {
   const params = useParams();
   const navigate = useNavigate(); //might not need this
 
+  async function fetchData() {
+    const id = params.id?.toString() || undefined;
+    if (!id) return;
+    setIsNew(false);
+    const response = await fetch(
+      `http://localhost:5050/record/${params.id.toString()}`
+    );
+    if (!response.ok) {
+      const message = `An error has occurred: ${response.statusText}`;
+      console.error(message);
+      return;
+    }
+    const record = await response.json();
+    if (!record) {
+      console.warn(`Record with id ${id} not found`);
+      return;
+    }
+  }
+  
+  async function recordMongoDB (t, p) {
+    setForm(t, p);
+    const game = { ...form };
+    try {
+      let response;
+      response = await fetch ("http://localhost:5050/record", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(game),
+      });
+    } catch (error) {
+      console.error('A problem occurred adding or updating a record: ', error);
+      setError("didn't work, L");
+    } finally {
+      setForm({ title: "", priority: ""});
+    }
+  }
+
   async function submit (e) {
     e.preventDefault();
     setError(null);
@@ -36,6 +75,8 @@ const Submit = () => {
     setP(ev.target.value);
   }
 
+
+
   return (
     <div className='flex'>
         <div>
@@ -49,48 +90,14 @@ const Submit = () => {
                 <input type='range' id="slider" min="0" max="10" step="1" value={p} onChange={sliderChange} /><br />
 
                 <input type="submit" value="Submit" />
+
+                {error != null && <p>{error.message}</p>}
             </form>
         </div>
     </div>
   )
 };
 
-async function fetchData() {
-  const id = params.id?.toString() || undefined;
-  if (!id) return;
-  setIsNew(false);
-  const response = await fetch(
-    `http://localhost:5050/record/${params.id.toString()}`
-  );
-  if (!response.ok) {
-    const message = `An error has occurred: ${response.statusText}`;
-    console.error(message);
-    return;
-  }
-  const record = await response.json();
-  if (!record) {
-    console.warn(`Record with id ${id} not found`);
-    return;
-  }
-}
 
-async function recordMongoDB (t, p) {
-  setForm(t, p, "");
-  const game = { ...form };
-  try {
-    let response;
-    response = await fetch ("http://localhost:5050/record", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(game),
-    });
-  } catch (error) {
-    console.error('A problem occurred adding or updating a record: ', error);
-  } finally {
-    setForm({ title: "", priority: "", level: ""});
-  }
-}
 
 export default Submit
