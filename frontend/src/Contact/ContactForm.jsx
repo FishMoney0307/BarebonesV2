@@ -7,7 +7,7 @@ const ContactForm = () => {
 
   //mongodb
   const [form, setForm] = useState({
-    title: "",
+    name: "",
     email: "",
     subject: "",
     message: "",
@@ -28,7 +28,7 @@ const ContactForm = () => {
     } catch (error) {
         console.error('A problem occurred adding or updating a record: ', error);
     } finally {
-        setForm({ title: "", email: "", subject: "", message: "" });
+        setForm({ name: "", email: "", subject: "", message: "" });
     }
   }
 
@@ -52,7 +52,36 @@ const ContactForm = () => {
   }
 
   return (
-    <div>ContactForm</div>
+    <>
+    <div className='flex'>
+        <div>
+            <h1>Contact Me!</h1> <br />
+        </div>
+        <div>
+            <form onSubmit={submit}>
+                <label for="name">Name: </label>
+                <input type="text" id="name" value={form.name}
+                    onChange={(e) => updateForm({name: e.target.value})} />
+                
+                <label for="email">Email: </label>
+                <input type="email" id="email" value={form.email}
+                    onChange={(e) => updateForm({email: e.target.value})} />
+                
+                <label for="subject">Subject: </label>
+                <input type="text" id="subject" value={form.subject}
+                    onChange={(e) => updateForm({subject: e.target.value})} />
+                
+                <label for="message">Message: </label>
+                <textarea id="message" value={form.message}
+                    onChange={(e) => updateForm({message: e.target.value})} />
+
+                {status === 'success' && <p>Thank you for your response, {form.name}</p>}
+
+                <button disabled={form.name === "" || status === 'submitting'}>Submit</button>
+            </form>
+        </div>
+    </div>
+    </>
   )
 }
 

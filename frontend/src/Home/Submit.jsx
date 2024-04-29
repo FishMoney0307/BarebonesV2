@@ -36,6 +36,8 @@ const Submit = () => {
       return;
     }
   }
+
+
   
   async function recordMongoDB (t, p) {
     //setForm({t, p});
@@ -51,7 +53,7 @@ const Submit = () => {
       });
     } catch (error) {
       console.error('A problem occurred adding or updating a record: ', error);
-      setError("didn't work, L");
+      setError("didn't work, L"); //PLEASe remember to remove this before final submission
     } finally {
       setForm({ title: "", priority: ""});
     }
@@ -84,7 +86,8 @@ const Submit = () => {
         </div>
         <div>
             <form onSubmit={submit}>
-                <input type="text" id="title" value={form.name} onChange={(e) => updateForm({title: e.target.value})} /><br />
+                <input type="text" id="title" value={form.title}
+                   onChange={(e) => updateForm({title: e.target.value})} /><br />
 
                 <label for="slider">Priority: </label>
                 <input type='range' id="slider" min="0" max="10" step="1" value={form.priority} onChange={(e) => updateForm({ priority: e.target.value})} /><br />
