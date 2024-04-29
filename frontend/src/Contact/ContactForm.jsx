@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import '../Home/Body.css';
 
 const ContactForm = () => {
   const [error, setError] = useState(null);
   const [status, setStatus] = useState('typing');
+  const [n, setN] = useState("");
 
   //mongodb
   const [form, setForm] = useState({
     name: "",
     email: "",
     subject: "",
-    message: "",
+    msg: "",
   });
   const params = useParams();
 
   async function recordMongoDB () {
-    const mail = { ...form };
+    const contactMessage = { ...form };
     try {
         let response;
         response = await fetch ("http://localhost:5050/contact", {
@@ -23,12 +25,14 @@ const ContactForm = () => {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(mail),
+            body: JSON.stringify(contactMessage),
         });
     } catch (error) {
         console.error('A problem occurred adding or updating a record: ', error);
+        setError("didn't work, L");
     } finally {
-        setForm({ name: "", email: "", subject: "", message: "" });
+        setN(form.name);
+        setForm({ name: "", email: "", subject: "", msg: "" });
     }
   }
 
@@ -71,13 +75,15 @@ const ContactForm = () => {
                 <input type="text" id="subject" value={form.subject}
                     onChange={(e) => updateForm({subject: e.target.value})} />
                 
-                <label for="message">Message: </label>
-                <textarea id="message" value={form.message}
-                    onChange={(e) => updateForm({message: e.target.value})} />
+                <label for="msg">Message: </label>
+                <textarea id="msg" value={form.msg}
+                    onChange={(e) => updateForm({msg: e.target.value})} />
 
-                {status === 'success' && <p>Thank you for your response, {form.name}</p>}
-
-                <button disabled={form.name === "" || status === 'submitting'}>Submit</button>
+                {status === 'success' && <p>Thank you for your response, {n}!</p>}
+                
+                {error != null && <p>{error.message}</p>}
+                <br />
+                <input type="submit" value="Submit" disabled={form.name === "" || status === 'submitting'} />
             </form>
         </div>
     </div>

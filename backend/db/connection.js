@@ -20,7 +20,10 @@ try {
 }
 
 let db = client.db("backlog");
+/*  I am going to leave these here as a testament to my stupidity
+    Not once did I think "Hey I can just make another collection under backlog"
 let cdb = client.db("contact");
 let ldb = client.db("login");
+*/
 
 export default db;

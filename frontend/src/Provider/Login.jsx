@@ -16,12 +16,15 @@ const Login = () => {
     username: "",
     password: "",
   });
-  
+  const [isNew, setIsNew] = useState(true);
+  const params = useParams();
 
   const handleLogin = () => {
     setToken('token');
     navigate("/", { replace: true });
   };
+
+  
 
   async function login (e) {
     e.preventDefault();

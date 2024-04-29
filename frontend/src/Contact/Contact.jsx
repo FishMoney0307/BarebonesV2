@@ -5,6 +5,7 @@ import '../About/About.css';
 import '../Home/Home.css';
 import CB from './ContactBody.jsx';
 import Record from '../Components/Record.jsx';
+import ContactForm from './ContactForm.jsx';
 
 const Contact = () => {
   return (
@@ -12,6 +13,7 @@ const Contact = () => {
       <Hero />
       <div className="Home">
         <CB />
+        <ContactForm />
         <Record />
         <Footer />
       </div>

@@ -1,6 +1,6 @@
 import express from "express";
 
-import cdb from "../db/connection.js";
+import db from "../db/connection.js";
 
 import { ObjectId } from "mongodb";
 
@@ -9,6 +9,11 @@ const router = express.Router();
 /*
     get list of all records if I need to display it
 */
+router.get("/", async (req, res) => {
+    let collection = await db.collection("contactCollection");
+    let results = await collection.find({}).toArray();
+    res.send(results).status(200);
+  });
 
 /*
     Same with get record by id (maybe for validation)
@@ -20,12 +25,12 @@ const router = express.Router();
 router.post("/", async (req, res) => {
     try {
         let newDocument = {
-            name    : req.body.name,
-            email   : req.body.email,
-            subject : req.body.subject,
-            message : req.body.messagem
+            name: req.body.name,
+            email: req.body.email,
+            subject: req.body.subject,
+            msg: req.body.msg,
         };
-        let collection = await cdb.collection("contactCollection");
+        let collection = await db.collection("contactCollection");
         let result = await collection.insertOne(newDocument);
         res.send(result).status(204);
     } catch (err) {
@@ -44,7 +49,7 @@ router.delete("/:id", async (req, res) => {
     try {
         const query = {_id: new ObjectId(req.params.id) };
 
-        const collection = cdb.collection("contactCollection");
+        const collection = db.collection("contactCollection");
         let result = await collection.deleteOne(query);
 
         res.send(result).status(200);
