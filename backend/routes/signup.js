@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
     try {
         let newDocument = {
             username: req.body.username,
-            password: req.body.priority,
+            password: req.body.password,
         };
         let collection = await ldb.collection("loginCollection");
         let result = await collection.insertOne(newDocument);

@@ -9,11 +9,6 @@ const router = express.Router();
 /*
     get list of all records if I need to display it
 */
-router.get("/", async (req, res) => {
-    let collection = await db.collection("contactCollection");
-    let results = await collection.find({}).toArray();
-    res.send(results).status(200);
-  });
 
 /*
     Same with get record by id (maybe for validation)

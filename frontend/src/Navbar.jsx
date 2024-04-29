@@ -50,7 +50,7 @@ export default function Navbar() {
           <NavLink className="booton" to="/login">Login</NavLink>
         </div>
         <div>
-          <NavLink className="booton" to="/create">Create Employee</NavLink>
+          <NavLink className="booton" to="/signup">Create New User</NavLink>
         </div>
       </nav>
     </div>

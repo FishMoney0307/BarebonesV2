@@ -12,6 +12,7 @@ import Contact from "./Contact/Contact.jsx";
 import About from "./About/About.jsx";
 import Login from "./Provider/Login.jsx";
 import Logout from "./Provider/Logout.jsx";
+import Signup from "./Provider/Signup.jsx";
 //import JWThome from "./Login/JWThome.jsx"
 //import Safehouse from "./Login/Safehouse.jsx";
 import "./index.css";
@@ -84,6 +85,16 @@ const router = createBrowserRouter([
       {
         path: "/logout",
         element: <Logout />,
+      },
+    ],
+  },
+  {
+    path: "/signup",
+    element: <App />,
+    children: [
+      {
+        path: "/signup",
+        element: <Signup />
       },
     ],
   },

@@ -51,7 +51,7 @@ const Signup = () => {
     } catch (error) {
       console.error('A problem occurred adding a record: ', error);
     } finally {
-      setForm({ username: "", priority: "" });
+      setForm({ username: "", password: "" });
     }
   }
 
@@ -82,13 +82,13 @@ const Signup = () => {
       </div>
       <div>
       <form onSubmit={signup}>
+          <label for="username">Username: </label>
           <input type="text" id="username" value={form.username} 
             onChange={(e) => updateForm({username: e.target.value})} />
-          <label for="username">Username: </label>
 
+          <label for="password">Password: </label>
           <input type="text" id="password" value={form.password}
             onChange={(e) => updateForm({password: e.target.value})} />
-          <label for="password">Password: </label>
 
           <input type="submit" value="Submit" />
 
