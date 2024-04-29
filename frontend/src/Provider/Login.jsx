@@ -11,6 +11,13 @@ const Login = () => {
   const { setToken } = useAuth();
   const navigate = useNavigate();
 
+  //For MongoDB
+  const [form, setForm] = useState ({
+    username: "",
+    password: "",
+  });
+  
+
   const handleLogin = () => {
     setToken('token');
     navigate("/", { replace: true });
@@ -31,12 +38,10 @@ const Login = () => {
     }, 3 * 1000);
   }
 
-  function textChangeU(ev) {
-    setU(ev.target.value);
-  }
-
-  function textChangeP(ev) {
-    setP(ev.target.value);
+  function updateForm (value) {
+    return setForm ((prev) => {
+      return { ...prev, ...value };
+    })
   }
 
   return (
@@ -46,13 +51,17 @@ const Login = () => {
       </div>
       <div>
         <form onSubmit={login}>
+          <input type="text" id="username" value={form.username} 
+            onChange={(e) => updateForm({username: e.target.value})} />
           <label for="username">Username: </label>
-          <input type="text" id="username" value={u} onChange={textChangeU} /><br />
 
+          <input type="text" id="password" value={form.password}
+            onChange={(e) => updateForm({password: e.target.value})} />
           <label for="password">Password: </label>
-          <input type="text" id="password" value={p} onChange={textChangeP} /><br />
 
           <input type="submit" value="Submit" />
+
+          {error != null && <p>{error.message}</p>}
         </form>
       </div>
     </>

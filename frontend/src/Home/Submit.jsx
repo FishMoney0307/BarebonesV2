@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from "react-router-dom";
 
 const Submit = () => {
+  //not used, but might need for validation idk
   const [t, setT] = useState('');
   const [p, setP] = useState('');
   const [error, setError] = useState(null);
@@ -16,6 +17,7 @@ const Submit = () => {
   const params = useParams();
   const navigate = useNavigate(); //might not need this
 
+  // will need this for validation later
   async function fetchData() {
     const id = params.id?.toString() || undefined;
     if (!id) return;
@@ -73,13 +75,6 @@ const Submit = () => {
     return setForm ((prev) => {
       return { ...prev, ...value };
     })
-  }
-
-  function titleChange (ev) {
-    setT(ev.target.value);
-  }
-  function sliderChange (ev) {
-    setP(ev.target.value);
   }
 
   return (
