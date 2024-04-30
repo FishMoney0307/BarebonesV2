@@ -18,8 +18,6 @@ const Submit = () => {
     priority: "5",
   });
   const [isNew, setIsNew] = useState(false);
-  const params = useParams();
-  const navigate = useNavigate(); //might not need this
 
   // will need this for validation later
   useEffect(() => {
@@ -38,6 +36,13 @@ const Submit = () => {
     validate();
     return;
   });
+  /*  shoutouts to this stack overflow forum for revealing how useEffects works to me
+      special shoutouts to the "accepted answer" being an incredibly unhelpful dork
+      and the actual answer being the 0 upvote response by the op
+      For some reason await was NOT working in the onsubmit function
+      No idea why, but it always called the mongodb function first
+      https://stackoverflow.com/questions/66926702/react-functions-not-happening-in-order
+  */
 
   async function submit (e) {
     e.preventDefault();
