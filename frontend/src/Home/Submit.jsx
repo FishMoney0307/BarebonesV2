@@ -2,15 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from "react-router-dom";
 
 const Submit = () => {
-  const [test, setTest] = useState(false);
-  const [loops, setLoops] = useState(0);
-
   //not used, but might need for validation idk
   const [t, setT] = useState('');
   const [p, setP] = useState('');
   const [error, setError] = useState(null);
   const [records, setRecords] = useState([]);
   const [status, setStatus] = useState('typing');
+  const navigate = useNavigate();
 
   //MongoDB things
   const [form, setForm] = useState({
@@ -90,6 +88,7 @@ const Submit = () => {
     try {
       await makeRecord();
       setStatus('success');
+      navigate("/");
     } catch (err) {
       setStatus('typing');
       setError(err)
@@ -113,20 +112,9 @@ const Submit = () => {
                 <button disabled={form.title === "" || !isNew || status === "submitting"}>
                   Submit
                 </button>
-                {/*status === 'success' &&
-                  <p>Your values are: {t} and {p}</p>*/}
 
                 {error != null && <p>{error.message}</p>}
-                {isNew && <p>New!</p>}
                 {!isNew && <p>Game already exists.</p>}
-                {test && <p>SOMEHOW</p>}
-                <p>Loops: {loops}</p>
-
-                {records.map((record) => {
-                  return (
-                    <p>{record.title}</p>
-                  )
-                })}
             </form>
         </div>
     </div>

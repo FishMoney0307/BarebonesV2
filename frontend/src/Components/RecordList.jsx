@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import React from 'react';
-import ReactDOM from 'react-dom';
 import '../Home/DBList.css'
 import { Button } from "react-bootstrap";
 
@@ -74,6 +73,7 @@ export default function RecordList() {
   // EDIT:
   // Sorta defunct since I preferred to pit the button in the return()
   // due to using the grid layout
+  // gonna leave it here just in case it nukes the page if i delete it
   function recordList() {
     return records.map((record) => {
       return (
@@ -87,6 +87,8 @@ export default function RecordList() {
   }
 
   // This following section will display the table with the records of individuals.
+  
+  // Heavily edited this, basically from my assignment7
   return (
     <>
       <div className = "table-container">
@@ -110,34 +112,6 @@ export default function RecordList() {
           })}
         </div>
       </div>
-
-      {/*
-      <div className="border rounded-lg overflow-hidden">
-        <div className="relative w-full overflow-auto">
-          <table className="w-full caption-bottom text-sm">
-            <thead className="[&amp;_tr]:border-b">
-              <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
-                  Name
-                </th>
-                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
-                  Position
-                </th>
-                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
-                  Level
-                </th>
-                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
-                  Action
-                </th>
-              </tr>
-            </thead>
-            <tbody className="[&amp;_tr:last-child]:border-0">
-              {recordList()}
-            </tbody>
-          </table>
-        </div>
-      </div>
-        */}
     </>
   );
 }

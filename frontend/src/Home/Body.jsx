@@ -21,9 +21,6 @@ const Body = () => {
             
           </div>
           <div className="smallContainer" style={{marginTop: "50px", marginBottom: "50px"}}>
-            <CRUD />
-          </div>
-          <div className="smallContainer" style={{marginTop: "50px", marginBottom: "50px"}}>
             <RecordList />
           </div>
         </div>
