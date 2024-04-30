@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 const Submit = () => {
   const [test, setTest] = useState(false);
+  const [loops, setLoops] = useState(0);
 
   //not used, but might need for validation idk
   const [t, setT] = useState('');
@@ -16,7 +17,7 @@ const Submit = () => {
     title: "",
     priority: "5",
   });
-  const [isNew, setIsNew] = useState(true);
+  const [isNew, setIsNew] = useState(false);
   const params = useParams();
   const navigate = useNavigate(); //might not need this
 
@@ -33,78 +34,67 @@ const Submit = () => {
       setRecords(records);
     }
     getRecords();
+    setIsNew(true);
+    validate();
     return;
-  }, [records.length]);
-
-
-  
-  async function recordMongoDB (t, p) { //t,p are useless i think remove and test if you have time
-    //setForm({t, p});
-    const game = { ...form };
-    try {
-      let response;
-      response = await fetch ("http://localhost:5050/record", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(game),
-      });
-    } catch (error) {
-      console.error('A problem occurred adding or updating a record: ', error);
-      setError("didn't work, L"); //PLEASe remember to remove this before final submission
-    } finally {
-      setForm({ title: "", priority: "5"});
-    }
-  }
+  });
 
   async function submit (e) {
     e.preventDefault();
-    setError(null);
-    setStatus('submitting');
-    validate();
-    // /\ I might not need this, but I'll keep it for now if I want to style
-    if (true) {
-      setError('Item already exists.');
-      setIsNew(true);
-      setTest(false);
-      return;
-    } else {
-      await recordMongoDB(t, p);
-      setStatus('success');
-      setTest(true);
-    }
-    /*
-    try {
-      if (!isNew) {
-        setError("Item already exists.");
-        setIsNew(true);
-        setTest(false);
-        return;
-      } else {
-        await recordMongoDB (t, p);
-        setStatus('success');
-        setTest(true);
-      }
-    } catch (err) {
-      setStatus('typing');
-      setError(err);
-    }
-    */
+    handler();
   }
 
-  function validate() {
+  async function handler () {
+    
+    setError(null);
+    setStatus('submitting');
+    // /\ I might not need this, but I'll keep it for now if I want to style
+    await makeRecord();
+    setStatus('success');
+  }
+
+  async function validate() {
     records.map((record) => {
       if (record.title === form.title) {
         setIsNew(false);
+        return false;
       }
     })
+    return true;
+  }
+
+  function updateChange (value) {
+    updateForm(value);
   }
 
   function updateForm (value) {
     return setForm ((prev) => {
       return { ...prev, ...value };
     })
+  }
+
+  async function makeRecord () {
+    //setForm({t, p});
+    const game = { ...form };
+    try {
+      if (isNew) {
+        let response;
+        setLoops(loops + 1);
+        
+        response = await fetch ("http://localhost:5050/record", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(game),
+        });
+      }
+    } catch (error) {
+      console.error('A problem occurred adding or updating a record: ', error);
+      setError("didn't work, L"); //PLEASe remember to remove this before final submission
+    } finally {
+      setForm({ title: "", priority: "5"});
+    }
   }
 
   return (
@@ -114,23 +104,29 @@ const Submit = () => {
         </div>
         <div>
             <form onSubmit={submit}>
-                <input type="text" id="title" value={form.title}
-                   onChange={(e) => updateForm({title: e.target.value})} /><br />
+                <input type="text" id="title" value={form.title} onChange={(e) => updateChange({title: e.target.value})} /><br />
 
                 <label for="slider">Priority: </label>
-                <input type='range' id="slider" min="0" max="10" step="1" value={form.priority} onChange={(e) => updateForm({ priority: e.target.value})} /><br />
+                <input type='range' id="slider" min="0" max="10" step="1" value={form.priority} 
+                  onChange={(e) => updateChange({ priority: e.target.value})} /><br />
 
-                <input type="submit" value="Submit" />
-
+                <button disabled={form.title === "" || !isNew || status === "submitting"}>
+                  Submit
+                </button>
                 {/*status === 'success' &&
                   <p>Your values are: {t} and {p}</p>*/}
 
                 {error != null && <p>{error.message}</p>}
-
-                <p>{records.length}</p>
                 {isNew && <p>New!</p>}
-                {!isNew && <p>Not new!</p>}
+                {!isNew && <p>Game already exists.</p>}
                 {test && <p>SOMEHOW</p>}
+                <p>Loops: {loops}</p>
+
+                {records.map((record) => {
+                  return (
+                    <p>{record.title}</p>
+                  )
+                })}
             </form>
         </div>
     </div>
