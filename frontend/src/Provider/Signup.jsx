@@ -1,12 +1,13 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "./authProvider";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Signup = () => {
   const [u, setU] = useState('');
   const [p, setP] = useState('');
   const [error, setError] = useState(null);
   const [status, setStatus] = useState('typing');
+  const [records, setRecords] = useState([]);
   const { setToken } = useAuth();
   const navigate = useNavigate();
 
@@ -18,23 +19,36 @@ const Signup = () => {
   const [isNew, setIsNew] = useState(true);
   const params = useParams();
 
-  async function fetchData() {
-    const id = params.id?.toString() || undefined;
-    if (!id) return;
-    setIsNew(false);
-    const response = await fetch(
-      `http://localhost:5050/record/${params.id.toString()}`
-    );
-    if (!response.ok) {
-      const message = `An error has occurred: ${response.statusText}`;
-      console.error(message);
-      return;
+  useEffect(() => {
+    async function getRecords() {
+      const response = await fetch(`http://localhost:5050/signup/`);
+      if (!response.ok) {
+        const message = `An error occurred.`;
+        console.error(message);
+        return;
+      }
+      const records = await response.json();
+      setRecords(records)
     }
-    const record = await response.json();
-    if (!record) {
-      console.warn(`Record with id ${id} not found`);
-      return;
-    }
+    getRecords();
+    setIsNew(true);
+    validate();
+    return;
+  });
+
+  async function validate() {
+    records.map((record) => {
+      if (record.username === form.username) {
+        setIsNew(false);
+      }
+    })
+    return;
+  }
+
+  function updateForm (value) {
+    return setForm((prev) => {
+      return { ...prev, ...value };
+    })
   }
 
   async function recordMongoDB () {
@@ -66,13 +80,7 @@ const Signup = () => {
       setStatus('typing');
       setError(err);
     }
-    navigate("/", { replace: true });
-  }
-
-  function updateForm (value) {
-    return setForm((prev) => {
-      return { ...prev, ...value };
-    })
+    //navigate("/", { replace: true });
   }
 
   return (
@@ -90,8 +98,11 @@ const Signup = () => {
           <input type="text" id="password" value={form.password}
             onChange={(e) => updateForm({password: e.target.value})} />
 
-          <input type="submit" value="Submit" />
+          <button disabled={form.userame === "" || form.password === "" || !isNew || status === "submitting"}>
+            Submit
+          </button>
 
+          {!isNew && <p>Username is already in use.</p>}
           {error != null && <p>{error.message}</p>}
         </form>
       </div>

@@ -46,10 +46,9 @@ const Submit = () => {
     records.map((record) => {
       if (record.title === form.title) {
         setIsNew(false);
-        return false;
       }
     })
-    return true;
+    return;
   }
 
   function updateForm (value) {
@@ -88,7 +87,6 @@ const Submit = () => {
     try {
       await makeRecord();
       setStatus('success');
-      navigate("/");
     } catch (err) {
       setStatus('typing');
       setError(err)

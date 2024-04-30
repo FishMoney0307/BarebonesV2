@@ -8,7 +8,13 @@ const router = express.Router();
 
 /*
     No need to get a list, that would probably be a crazy security issue lol
+    EDIT: you need the list idiot how are you gonna check if the login is correct
 */
+router.get("/", async (req, res) => {
+    let collection = await ldb.collection("loginCollection");
+    let results = await collection.find({}).toArray();
+    res.send(results).status(200);
+})
 
 // Single record by id
 router.get("/:id", async (req, res) => {
