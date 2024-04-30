@@ -44,20 +44,6 @@ const Submit = () => {
       https://stackoverflow.com/questions/66926702/react-functions-not-happening-in-order
   */
 
-  async function submit (e) {
-    e.preventDefault();
-    handler();
-  }
-
-  async function handler () {
-    
-    setError(null);
-    setStatus('submitting');
-    // /\ I might not need this, but I'll keep it for now if I want to style
-    await makeRecord();
-    setStatus('success');
-  }
-
   async function validate() {
     records.map((record) => {
       if (record.title === form.title) {
@@ -66,10 +52,6 @@ const Submit = () => {
       }
     })
     return true;
-  }
-
-  function updateChange (value) {
-    updateForm(value);
   }
 
   function updateForm (value) {
@@ -84,8 +66,6 @@ const Submit = () => {
     try {
       if (isNew) {
         let response;
-        setLoops(loops + 1);
-        
         response = await fetch ("http://localhost:5050/record", {
           method: "POST",
           headers: {
@@ -102,6 +82,20 @@ const Submit = () => {
     }
   }
 
+  async function submit (e) {
+    e.preventDefault();
+    setError(null);
+    setStatus('submitting');
+    // /\ I might not need this, but I'll keep it for now if I want to style
+    try {
+      await makeRecord();
+      setStatus('success');
+    } catch (err) {
+      setStatus('typing');
+      setError(err)
+    }
+  }
+
   return (
     <div className='flex'>
         <div>
@@ -109,11 +103,12 @@ const Submit = () => {
         </div>
         <div>
             <form onSubmit={submit}>
-                <input type="text" id="title" value={form.title} onChange={(e) => updateChange({title: e.target.value})} /><br />
+                <input type="text" id="title" value={form.title} 
+                  onChange={(e) => updateForm({title: e.target.value})} /><br />
 
-                <label for="slider">Priority: </label>
+                <label for="slider">Priority: {form.priority}</label>
                 <input type='range' id="slider" min="0" max="10" step="1" value={form.priority} 
-                  onChange={(e) => updateChange({ priority: e.target.value})} /><br />
+                  onChange={(e) => updateForm({ priority: e.target.value})} /><br />
 
                 <button disabled={form.title === "" || !isNew || status === "submitting"}>
                   Submit
