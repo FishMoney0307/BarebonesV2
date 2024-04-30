@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from "react-router-dom";
 
 const Submit = () => {
+  const [test, setTest] = useState(false);
+
   //not used, but might need for validation idk
   const [t, setT] = useState('');
   const [p, setP] = useState('');
   const [error, setError] = useState(null);
+  const [records, setRecords] = useState([]);
   const [status, setStatus] = useState('typing');
 
   //MongoDB things
@@ -18,28 +21,24 @@ const Submit = () => {
   const navigate = useNavigate(); //might not need this
 
   // will need this for validation later
-  async function fetchData() {
-    const id = params.id?.toString() || undefined;
-    if (!id) return;
-    setIsNew(false);
-    const response = await fetch(
-      `http://localhost:5050/record/${params.id.toString()}`
-    );
-    if (!response.ok) {
-      const message = `An error has occurred: ${response.statusText}`;
-      console.error(message);
-      return;
+  useEffect(() => {
+    async function getRecords() {
+      const response = await fetch(`http://localhost:5050/record/`);
+      if (!response.ok) {
+        const message = `An error occurred: ${response.statusText}`;
+        console.error(message);
+        return;
+      }
+      const records = await response.json();
+      setRecords(records);
     }
-    const record = await response.json();
-    if (!record) {
-      console.warn(`Record with id ${id} not found`);
-      return;
-    }
-  }
+    getRecords();
+    return;
+  }, [records.length]);
 
 
   
-  async function recordMongoDB (t, p) {
+  async function recordMongoDB (t, p) { //t,p are useless i think remove and test if you have time
     //setForm({t, p});
     const game = { ...form };
     try {
@@ -55,22 +54,51 @@ const Submit = () => {
       console.error('A problem occurred adding or updating a record: ', error);
       setError("didn't work, L"); //PLEASe remember to remove this before final submission
     } finally {
-      setForm({ title: "", priority: ""});
+      setForm({ title: "", priority: "5"});
     }
   }
 
   async function submit (e) {
     e.preventDefault();
     setError(null);
-    setStatus('submitting'); 
+    setStatus('submitting');
+    validate();
     // /\ I might not need this, but I'll keep it for now if I want to style
-    try {
-      await recordMongoDB (t, p);
+    if (true) {
+      setError('Item already exists.');
+      setIsNew(true);
+      setTest(false);
+      return;
+    } else {
+      await recordMongoDB(t, p);
       setStatus('success');
+      setTest(true);
+    }
+    /*
+    try {
+      if (!isNew) {
+        setError("Item already exists.");
+        setIsNew(true);
+        setTest(false);
+        return;
+      } else {
+        await recordMongoDB (t, p);
+        setStatus('success');
+        setTest(true);
+      }
     } catch (err) {
       setStatus('typing');
       setError(err);
     }
+    */
+  }
+
+  function validate() {
+    records.map((record) => {
+      if (record.title === form.title) {
+        setIsNew(false);
+      }
+    })
   }
 
   function updateForm (value) {
@@ -98,6 +126,11 @@ const Submit = () => {
                   <p>Your values are: {t} and {p}</p>*/}
 
                 {error != null && <p>{error.message}</p>}
+
+                <p>{records.length}</p>
+                {isNew && <p>New!</p>}
+                {!isNew && <p>Not new!</p>}
+                {test && <p>SOMEHOW</p>}
             </form>
         </div>
     </div>
