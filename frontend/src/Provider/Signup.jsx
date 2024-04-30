@@ -80,7 +80,7 @@ const Signup = () => {
       setStatus('typing');
       setError(err);
     }
-    //navigate("/", { replace: true });
+    navigate("/", { replace: true });
   }
 
   return (

@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "./authProvider";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 //import jwt from 'jsonwebtoken';
 
 const Login = () => {
@@ -16,8 +16,42 @@ const Login = () => {
     username: "",
     password: "",
   });
-  const [isNew, setIsNew] = useState(true);
+  const [records, setRecords] = useState([]);
+  const [isNew, setIsNew] = useState(false);
+  const [isValid, setIsValid] = useState(false);
   const params = useParams();
+
+  useEffect(() => {
+    async function getRecords() {
+      const response = await fetch(`http://localhost:5050/signup`);
+      if (!response.ok) {
+        const message = `An error occurred.`;
+        console.error(message);
+        return;
+      }
+      const records = await response.json();
+      setRecords(records)
+    }
+    getRecords();
+    setIsNew(true);
+    validate();
+    return;
+  });
+
+  async function validate() {
+    records.map((record) => {
+      if (record.username === form.username && record.password === form.password) {
+        setIsValid(true);
+      }
+    })
+    return;
+  }
+
+  function updateForm (value) {
+    return setForm((prev) => {
+      return { ...prev, ...value };
+    })
+  }
 
   const handleLogin = () => {
     setToken('token');
@@ -32,18 +66,32 @@ const Login = () => {
     setStatus('submitting');
     try {
       await loginUser (u, p);
+      setStatus('success');
+      setTimeout(() => {
+        handleLogin();
+      }, 3 * 1000);
     } catch (err) {
-      setStatus('typing');
+      setStatus('incorrect');
       setError(err);
+      setForm({ username: "", password: "" });
     }
-    setTimeout(() => {
-      handleLogin();
-    }, 3 * 1000);
   }
 
   function updateForm (value) {
     return setForm ((prev) => {
       return { ...prev, ...value };
+    })
+  }
+
+  function loginUser(u, p) {
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        if (!isValid) {
+          rej (new Error('Incorrect username or password. 1'));
+        } else {
+          res();
+        }
+      })
     })
   }
 
@@ -54,15 +102,20 @@ const Login = () => {
       </div>
       <div>
         <form onSubmit={login}>
+          <label for="username">Username: </label>
           <input type="text" id="username" value={form.username} 
             onChange={(e) => updateForm({username: e.target.value})} />
-          <label for="username">Username: </label>
 
+          <label for="password">Password: </label>
           <input type="text" id="password" value={form.password}
             onChange={(e) => updateForm({password: e.target.value})} />
-          <label for="password">Password: </label>
 
-          <input type="submit" value="Submit" />
+          <button disabled={form.userame === "" || form.password === "" || status === "submitting"}>
+            Submit
+          </button>
+
+          {isValid && status === 'success' && <p>Success! Logging you in...</p>}
+          {!isValid && status === 'incorrect' && <p>Incorrect username or password.</p>}
 
           {error != null && <p>{error.message}</p>}
         </form>
@@ -70,18 +123,5 @@ const Login = () => {
     </>
   )
 };
-
-function loginUser(u, p) {
-  return new Promise((res, rej) => {
-    setTimeout(() => {
-      let shouldError = (u === '' || p === '');
-      if (shouldError) {
-        rej (new Error('Please fill out all fields'));
-      } else {
-        res();
-      }
-    })
-  })
-}
 
 export default Login;
