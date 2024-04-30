@@ -72,6 +72,48 @@ export default function RecordList() {
     setRecords(newRecords);
   }
 
+  //Function to Update record
+  //Increases priority by 1
+  async function incrementRecord(id) {
+    let res = await fetch(`http://localhost:5050/record/${id}`);
+    let rec = await res.json();
+    let pri = rec.priority;
+    if (pri != '10') {
+      pri = parseInt(pri, 10) + 1;
+      pri = '' + pri;
+    }
+    rec.priority=pri;
+    let response = await fetch(`http://localhost:5050/record/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(rec),
+    });
+    const newRecords = records.splice(id, 1, rec);
+    setRecords(newRecords);
+  }
+
+  async function decrementRecord(id) {
+    let res = await fetch(`http://localhost:5050/record/${id}`);
+    let rec = await res.json();
+    let pri = rec.priority;
+    if (pri != '0') {
+      pri = parseInt(pri, 10) - 1;
+      pri = '' + pri;
+    }
+    rec.priority=pri;
+    let response = await fetch(`http://localhost:5050/record/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(rec),
+    });
+    const newRecords = records.splice(id, 1, rec);
+    setRecords(newRecords);
+  }
+
   // This method will map out the records on the table
   // EDIT:
   // Sorta defunct since I preferred to pit the button in the return()
@@ -106,6 +148,14 @@ export default function RecordList() {
               <div className="table-row">
                 <div className="row-item">{record.title}</div>
                 <div className="row-item">{record.priority}</div>
+                <div className="row-item">
+                  <Button onClick={(e) => incrementRecord(record._id)}
+                    variant="info">+</Button>
+                </div>
+                <div className="row-item">
+                  <Button onClick={(e) => decrementRecord(record._id)}
+                    variant="info">-</Button>
+                </div>
                 <div className="row-item">
                   <Button onClick={(e) => deleteRecord(record._id)}
                     variant="danger">Delete</Button>
