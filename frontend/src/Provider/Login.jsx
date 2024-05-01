@@ -53,7 +53,7 @@ const Login = () => {
   }
 
   const handleLogin = () => {
-    //navigate("/", { replace: true });
+    navigate("/", { replace: true });
   };
 
   
