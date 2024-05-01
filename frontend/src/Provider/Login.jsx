@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useAuth } from "./authProvider";
-import React, { useState, useEffect } from 'react';
+import { AuthContext, useAuth } from "./authProvider";
+import React, { useState, useEffect, useContext } from 'react';
 //import jwt from 'jsonwebtoken';
 
 const Login = () => {
@@ -8,7 +8,8 @@ const Login = () => {
   const [p, setP] = useState('');
   const [error, setError] = useState(null);
   const [status, setStatus] = useState('typing');
-  const { setToken } = useAuth();
+  const { setToken } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   const navigate = useNavigate();
 
   //For MongoDB
@@ -52,8 +53,7 @@ const Login = () => {
   }
 
   const handleLogin = () => {
-    setToken('token');
-    navigate("/", { replace: true });
+    //navigate("/", { replace: true });
   };
 
   
@@ -65,6 +65,8 @@ const Login = () => {
     try {
       await loginUser (u, p);
       setStatus('success');
+      debugger;
+      await setToken('tokeny');
       setTimeout(() => {
         handleLogin();
       }, 3 * 1000);
@@ -112,10 +114,11 @@ const Login = () => {
             Submit
           </button>
 
-          {isValid && status === 'success' && <p>Success! Logging you in...</p>}
+          {isValid && status === 'success' && <p>Token is { token }</p>}
           {!isValid && status === 'incorrect' && <p>Incorrect username or password.</p>}
 
           {error != null && <p>{error.message}</p>}
+          {token === null && <p>Token blank</p>}
         </form>
       </div>
     </>
