@@ -88,7 +88,7 @@ const Login = () => {
     return new Promise((res, rej) => {
       setTimeout(() => {
         if (!isValid) {
-          rej (new Error('Incorrect username or password. 1'));
+          rej (new Error('Incorrect username or password.'));
         } else {
           res();
         }
@@ -119,7 +119,6 @@ const Login = () => {
               </button>
 
               {isValid && status === 'success' && <p>Success! Logging in...</p>}
-              {!isValid && status === 'incorrect' && <p>Incorrect username or password.</p>}
 
               {error != null && <p>{error.message}</p>}
               {/*token === null && <p>Token blank</p>*/}

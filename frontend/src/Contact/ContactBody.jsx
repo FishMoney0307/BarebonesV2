@@ -7,7 +7,7 @@ const ContactBody = () => {
     <div className="bigContainer">
         <div>
             <h1>Developer</h1>
-            <p className="contactText">I am a developer at rowan University, I have worked with Java, Javascript, CSS, HTML,
+            <p className="contactText">I am Ethan Karczewski, a developer at rowan University, I have worked with Java, Javascript, CSS, HTML,
               CSS, C, C++, Python, and now React, Express, and MongoDB.
             </p> <br />
         </div>

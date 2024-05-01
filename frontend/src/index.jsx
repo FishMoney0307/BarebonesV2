@@ -7,6 +7,7 @@ import AuthProvider, { AuthContext } from "./Provider/authProvider";
 
 import "./index.css";
 import App from "./App";
+import ProtectedRoute from "./Provider/ProtectedRoute";
 
 ReactDOM.render(
   <React.StrictMode>
