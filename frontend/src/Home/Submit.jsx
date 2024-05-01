@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from '../Provider/authProvider.jsx';
+import './Form.css';
 
 const Submit = () => {
   //not used, but might need for validation idk
@@ -96,18 +97,21 @@ const Submit = () => {
   return (
     <div className='flex'>
         <div>
-            <h1>Game Entry</h1> <br />
+            <div className="formTitle">Game Entry</div> <br />
         </div>
         <div>
+        <div className="line"></div> <br />
             <form onSubmit={submit}>
+                <label for="text">Title:</label> &emsp;
                 <input type="text" id="title" value={form.title} 
                   onChange={(e) => updateForm({title: e.target.value})} /><br />
 
-                <label for="slider">Priority: {form.priority}</label>
+                <label for="slider">Priority: {form.priority}</label> &emsp;
                 <input type='range' id="slider" min="0" max="10" step="1" value={form.priority} 
-                  onChange={(e) => updateForm({ priority: e.target.value})} /><br />
+                  onChange={(e) => updateForm({ priority: e.target.value})} /><br /> <br />
 
-                <button disabled={form.title === "" || !isNew || status === "submitting" || !token}>
+                <button disabled={form.title === "" || !isNew || status === "submitting" || !token}
+                        className="booton">
                   Submit
                 </button>
 

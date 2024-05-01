@@ -21,15 +21,16 @@ body {
 }
 
 .smallContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr 4fr 1fr;
+    
     align-items: center;
 
     margin: 0 auto;
     border-radius: 4px;
     
 }
+
 
 /*  might be obsolete. think i used it before i properly CSS'd the tables
     If you're seeing this comment then I forgot about it.*/
