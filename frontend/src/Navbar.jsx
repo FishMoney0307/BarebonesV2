@@ -8,16 +8,16 @@ export default function Navbar() {
     <div>
       <div className="navbar" > 
         <div>
-          <NavLink className="booton" to="/">Home</NavLink>
+          <NavLink className="bootonNav" to="/">Home</NavLink>
         </div>
         <div>
-          <NavLink className="booton" to="/about">About</NavLink>
+          <NavLink className="bootonNav" to="/about">About</NavLink>
         </div>
         <div>
-          <NavLink className="booton" to="/contact">Contact Me</NavLink>
+          <NavLink className="bootonNav" to="/contact">Contact Me</NavLink>
         </div>
         <div>
-          <NavLink className="booton" to="/account">Account</NavLink>
+          <NavLink className="bootonNav" to="/account">Account</NavLink>
         </div>
       </div>
     </div>

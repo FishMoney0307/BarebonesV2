@@ -1,0 +1,12 @@
+.contactText {
+    font-size: 24px;
+    width: 50%;
+    text-align: center;
+    margin: auto;
+    padding: 10px;
+}
+/* If I make this a, p, it affects the NAVBAR?????*/
+
+.bigContainer {
+    padding: 40px;
+}
