@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext, useAuth } from "./authProvider";
 import React, { useState, useEffect, useContext } from 'react';
+import './Account.css'
 //import jwt from 'jsonwebtoken';
 
 const Login = () => {
@@ -66,7 +67,7 @@ const Login = () => {
       await loginUser (u, p);
       setStatus('success');
       debugger;
-      await setToken('tokeny');
+      await setToken('' + form.username + "abcdef");
       setTimeout(() => {
         handleLogin();
       }, 3 * 1000);
@@ -97,29 +98,35 @@ const Login = () => {
 
   return (
     <>
-      <div>
-        <h1>Login</h1> <br />
-      </div>
-      <div>
-        <form onSubmit={login}>
-          <label for="username">Username: </label>
-          <input type="text" id="username" value={form.username} 
-            onChange={(e) => updateForm({username: e.target.value})} />
+      <div className="backgr">
+        <div></div>
+        <div class="acctContainer">
+          <div>
+            <h1>Login</h1> <br />
+          </div>
+          <div className="formContainer">
+            <form onSubmit={login}>
+              <label for="username">Username: </label>
+              <input type="text" id="username" value={form.username}
+                onChange={(e) => updateForm({ username: e.target.value })} /> <br />
 
-          <label for="password">Password: </label>
-          <input type="text" id="password" value={form.password}
-            onChange={(e) => updateForm({password: e.target.value})} />
+              <label for="password">Password: </label>
+              <input type="text" id="password" value={form.password}
+                onChange={(e) => updateForm({ password: e.target.value })} /> <br /> <br />
 
-          <button disabled={form.userame === "" || form.password === "" || status === "submitting"}>
-            Submit
-          </button>
+              <button className="booton" disabled={form.userame === "" || form.password === "" || status === "submitting"}>
+                Submit
+              </button>
 
-          {isValid && status === 'success' && <p>Token is { token }</p>}
-          {!isValid && status === 'incorrect' && <p>Incorrect username or password.</p>}
+              {isValid && status === 'success' && <p>Success! Logging in...</p>}
+              {!isValid && status === 'incorrect' && <p>Incorrect username or password.</p>}
 
-          {error != null && <p>{error.message}</p>}
-          {token === null && <p>Token blank</p>}
-        </form>
+              {error != null && <p>{error.message}</p>}
+              {/*token === null && <p>Token blank</p>*/}
+            </form>
+          </div>
+        </div>
+        <div></div>
       </div>
     </>
   )

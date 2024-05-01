@@ -31,7 +31,7 @@ const Body = () => {
           </div>
         </div>
         <div>
-          <div className="smallContainer" style={{marginTop: "50px", marginBottom: "50px"}}>
+          <div className="bigContainer" style={{marginTop: "50px", marginBottom: "50px"}}>
             {!token && 
             <div><p>You are not yet authenticated. Please login to access the database.</p><br />
               <button className="booton" onClick={login}>Login</button></div>}

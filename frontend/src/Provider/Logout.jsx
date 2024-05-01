@@ -15,7 +15,15 @@ const Logout = () => {
     handleLogout();
   }, 3 * 1000);
 
-  return <>Logout Page</>;
+  return(
+    <div className="backgr">
+      <div></div>
+      <h1 className="acctContainer">
+        Logging you out.
+      </h1>
+      <div></div>
+    </div>
+  )
 };
 
 export default Logout;

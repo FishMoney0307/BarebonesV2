@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "./authProvider";
 import React, { useState, useEffect } from 'react';
+import './Account.css';
 
 const Signup = () => {
   const [error, setError] = useState(null);
@@ -81,29 +82,33 @@ const Signup = () => {
   }
 
   return (
-    <>
-      <div>
-        <h1>Sign Up</h1> <br />
+    <div className="backgr">
+      <div></div>
+      <div className="acctContainer">
+        <div>
+          <h1>Sign Up</h1> <br />
+        </div>
+        <div className="formContainer">
+          <form onSubmit={signup}>
+            <label for="username">Username: </label>
+            <input type="text" id="username" value={form.username}
+              onChange={(e) => updateForm({ username: e.target.value })} /> <br />
+
+            <label for="password">Password: </label>
+            <input type="text" id="password" value={form.password}
+              onChange={(e) => updateForm({ password: e.target.value })} /> <br /> <br />
+
+            <button className="booton" disabled={form.userame === "" || form.password === "" || !isNew || status === "submitting"}>
+              Submit
+            </button>
+
+            {!isNew && <p>Username is already in use.</p>}
+            {error != null && <p>{error.message}</p>}
+          </form>
+        </div>
       </div>
-      <div>
-      <form onSubmit={signup}>
-          <label for="username">Username: </label>
-          <input type="text" id="username" value={form.username} 
-            onChange={(e) => updateForm({username: e.target.value})} />
-
-          <label for="password">Password: </label>
-          <input type="text" id="password" value={form.password}
-            onChange={(e) => updateForm({password: e.target.value})} />
-
-          <button disabled={form.userame === "" || form.password === "" || !isNew || status === "submitting"}>
-            Submit
-          </button>
-
-          {!isNew && <p>Username is already in use.</p>}
-          {error != null && <p>{error.message}</p>}
-        </form>
-      </div>
-    </>
+      <div></div>
+    </div>
   )
 };
 
