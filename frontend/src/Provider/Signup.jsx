@@ -3,12 +3,9 @@ import { useAuth } from "./authProvider";
 import React, { useState, useEffect } from 'react';
 
 const Signup = () => {
-  const [u, setU] = useState('');
-  const [p, setP] = useState('');
   const [error, setError] = useState(null);
   const [status, setStatus] = useState('typing');
   const [records, setRecords] = useState([]);
-  const { setToken } = useAuth();
   const navigate = useNavigate();
 
   //MongoDB

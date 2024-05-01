@@ -13,6 +13,7 @@ import About from "./About/About.jsx";
 import Login from "./Provider/Login.jsx";
 import Logout from "./Provider/Logout.jsx";
 import Signup from "./Provider/Signup.jsx";
+import Account from "./Provider/Account.jsx";
 import ProtectedRoute from "./Provider/ProtectedRoute.jsx";
 import "./index.css";
 import AuthProvider, { useAuth } from "./Provider/authProvider.jsx";
@@ -97,6 +98,16 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <Signup />
+      },
+    ],
+  },
+  {
+    path: "/account",
+    element: <App />,
+    children: [
+      {
+        path: "/account",
+        element: <Account />
       },
     ],
   },

@@ -1,6 +1,9 @@
 .navbar {
     margin: 0 auto;
     display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    gap: 5px;
     background-color: #3b0a04;
 }
 
@@ -17,5 +20,9 @@
 }
 
 .booton:hover {
+    background-color: #ff56508c;
+}
+
+.booton:disabled {
     background-color: #ff56508c;
 }

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useParams, useNavigate } from "react-router-dom";
+import { AuthContext } from '../Provider/authProvider.jsx';
 
 const Submit = () => {
   //not used, but might need for validation idk
@@ -9,6 +10,7 @@ const Submit = () => {
   const [records, setRecords] = useState([]);
   const [status, setStatus] = useState('typing');
   const navigate = useNavigate();
+  const { token } = useContext(AuthContext);
 
   //MongoDB things
   const [form, setForm] = useState({
@@ -105,7 +107,7 @@ const Submit = () => {
                 <input type='range' id="slider" min="0" max="10" step="1" value={form.priority} 
                   onChange={(e) => updateForm({ priority: e.target.value})} /><br />
 
-                <button disabled={form.title === "" || !isNew || status === "submitting"}>
+                <button disabled={form.title === "" || !isNew || status === "submitting" || !token}>
                   Submit
                 </button>
 

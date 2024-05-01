@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
 import React from 'react';
-import ReactDOM from 'react-dom';
+
 import './Navbar.css';
 
 export default function Navbar() {
   return (
     <div>
-      <nav className="navbar" > 
+      <div className="navbar" > 
         <div>
           <NavLink className="booton" to="/">Home</NavLink>
         </div>
@@ -17,12 +17,9 @@ export default function Navbar() {
           <NavLink className="booton" to="/contact">Contact Me</NavLink>
         </div>
         <div>
-          <NavLink className="booton" to="/login">Login</NavLink>
+          <NavLink className="booton" to="/account">Account</NavLink>
         </div>
-        <div>
-          <NavLink className="booton" to="/signup">Create New User</NavLink>
-        </div>
-      </nav>
+      </div>
     </div>
   );
 }
