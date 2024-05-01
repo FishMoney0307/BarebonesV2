@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from '../Provider/authProvider.jsx';
-import './Form.css';
+import './Forms.css';
 
 const Submit = () => {
   //not used, but might need for validation idk

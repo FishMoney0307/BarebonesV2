@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import '../Home/Body.css';
+import '../Home/Forms.css'
 
 const ContactForm = () => {
   const [error, setError] = useState(null);
@@ -63,27 +64,27 @@ const ContactForm = () => {
         </div>
         <div>
             <form onSubmit={submit}>
-                <label for="name">Name: </label>
+                <label for="name">Name: </label>  &emsp; &emsp; 
                 <input type="text" id="name" value={form.name}
-                    onChange={(e) => updateForm({name: e.target.value})} />
+                    onChange={(e) => updateForm({name: e.target.value})} /> <br />
                 
-                <label for="email">Email: </label>
+                <label for="email">Email: </label> &emsp; &emsp; &ensp;
                 <input type="email" id="email" value={form.email}
-                    onChange={(e) => updateForm({email: e.target.value})} />
+                    onChange={(e) => updateForm({email: e.target.value})} /> <br />
                 
-                <label for="subject">Subject: </label>
+                <label for="subject">Subject: </label> &emsp; &ensp;
                 <input type="text" id="subject" value={form.subject}
-                    onChange={(e) => updateForm({subject: e.target.value})} />
+                    onChange={(e) => updateForm({subject: e.target.value})} /> <br />
                 
-                <label for="msg">Message: </label>
-                <textarea id="msg" value={form.msg}
-                    onChange={(e) => updateForm({msg: e.target.value})} />
+                <label for="msg">Message: </label>&emsp; &nbsp;
+                <textarea id="msg" value={form.msg} 
+                    onChange={(e) => updateForm({msg: e.target.value})} /> <br />
 
                 {status === 'success' && <p>Thank you for your response, {n}!</p>}
                 
                 {error != null && <p>{error.message}</p>}
                 <br />
-                <input type="submit" value="Submit" disabled={form.name === "" || status === 'submitting'} />
+                <input className="booton" type="submit" value="Submit" disabled={form.name === "" || status === 'submitting'} />
             </form>
         </div>
     </div>

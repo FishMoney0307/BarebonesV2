@@ -24,7 +24,10 @@ label {
 }
 
 input {
-    text-align: center;
+    display: inline-block;
+    margin: 10px;
+    align-items: center;
+    justify-content: center;
     font-size: 18px;
     accent-color: red;
     padding: 5px;
