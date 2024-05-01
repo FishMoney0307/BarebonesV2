@@ -42,11 +42,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/contact",
-    element: <ProtectedRoute />,
+    element: <App/>,
     children: [
       {
         path: "/contact",
-        element: <AuthProvider><Contact /></AuthProvider>,
+        element: <Contact />,
       },
     ],
   },
