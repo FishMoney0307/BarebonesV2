@@ -3,7 +3,11 @@ import React from 'react';
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import Cookies from 'js-cookie';
 
-const AuthContext = createContext();
+export const AuthContext = createContext("");
+
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
 
 /* https://dev.to/sanjayttg/jwt-authentication-in-react-with-react-router-1d03
     Tutorial used for authentication, big help */
@@ -14,7 +18,7 @@ const AuthProvider = ({ children }) => {
 
   // Function to set the authentication token
   const setToken = (newToken) => {
-    Cookies.set('token', newToken, {expires: 7, secure: true });
+    //Cookies.set('token', newToken, {expires: 7, secure: true });
     setToken_(newToken);
   };
 
@@ -41,10 +45,6 @@ const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
-};
-
-export const useAuth = () => {
-  return useContext(AuthContext);
 };
 
 export default AuthProvider;

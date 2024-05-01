@@ -7,7 +7,7 @@ const Logout = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    setToken();
+    setToken(null);
     navigate("/", { replace: true });
   };
 

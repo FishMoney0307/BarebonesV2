@@ -17,7 +17,6 @@ const Login = () => {
     password: "",
   });
   const [records, setRecords] = useState([]);
-  const [isNew, setIsNew] = useState(false);
   const [isValid, setIsValid] = useState(false);
   const params = useParams();
 
@@ -33,7 +32,6 @@ const Login = () => {
       setRecords(records)
     }
     getRecords();
-    setIsNew(true);
     validate();
     return;
   });

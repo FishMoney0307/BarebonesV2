@@ -34,9 +34,7 @@ const Submit = () => {
     validate();
     return;
   });
-  /*  shoutouts to this stack overflow forum for revealing how useEffects works to me
-      special shoutouts to the "accepted answer" being an incredibly unhelpful dork
-      and the actual answer being the 0 upvote response by the op
+  /*  shoutouts to this stack overflow forum for revealing exactly how useEffects works to me
       For some reason await was NOT working in the onsubmit function
       No idea why, but it always called the mongodb function first
       https://stackoverflow.com/questions/66926702/react-functions-not-happening-in-order

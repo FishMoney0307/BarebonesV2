@@ -13,9 +13,11 @@ import About from "./About/About.jsx";
 import Login from "./Provider/Login.jsx";
 import Logout from "./Provider/Logout.jsx";
 import Signup from "./Provider/Signup.jsx";
-//import JWThome from "./Login/JWThome.jsx"
-//import Safehouse from "./Login/Safehouse.jsx";
+import ProtectedRoute from "./Provider/ProtectedRoute.jsx";
 import "./index.css";
+import AuthProvider, { useAuth } from "./Provider/authProvider.jsx";
+
+//const { token } = useAuth();
 
 const router = createBrowserRouter([
   {
@@ -40,11 +42,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/contact",
-    element: <App />,
+    element: <ProtectedRoute />,
     children: [
       {
         path: "/contact",
-        element: <Contact />,
+        element: <AuthProvider><Contact /></AuthProvider>,
       },
     ],
   },
