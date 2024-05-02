@@ -111,7 +111,7 @@ const Login = () => {
                 onChange={(e) => updateForm({ username: e.target.value })} /> <br />
 
               <label for="password">Password: </label>
-              <input type="text" id="password" value={form.password}
+              <input type="password" id="password" value={form.password}
                 onChange={(e) => updateForm({ password: e.target.value })} /> <br /> <br />
 
               <button className="booton" disabled={form.userame === "" || form.password === "" || status === "submitting"}>

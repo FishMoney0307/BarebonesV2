@@ -84,7 +84,10 @@ const ContactForm = () => {
                 
                 {error != null && <p>{error.message}</p>}
                 <br />
-                <input className="booton" type="submit" value="Submit" disabled={form.name === "" || status === 'submitting'} />
+                <input className="booton" type="submit" value="Submit" 
+                disabled={  form.name === "" || form.email === "" ||
+                            form.subject === "" || form.msg === "" || 
+                            status === 'submitting'} />
             </form>
         </div>
     </div>

@@ -116,7 +116,7 @@ const Submit = () => {
                 </button>
 
                 {error != null && <p>{error.message}</p>}
-                {!isNew && <p>Game already exists.</p>}
+                {!isNew && token != null && <p>Game already exists.</p>}
             </form>
         </div>
     </div>
